@@ -276,8 +276,8 @@ Rectangle {
         visible: false
         onAccepted: {
             window.filepath = fileDialog_load.fileUrl
-            window.getPicture=true
-            //console.log("You chose: " +  window.filepath)
+            window.pictureNum+=1
+            console.log("You chose: " +  window.filepath)
         }
         onRejected: {
             console.log("Canceled")

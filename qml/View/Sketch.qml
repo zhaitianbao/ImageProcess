@@ -61,7 +61,7 @@ Rectangle {
         width: 200;height: 50
         content: isChinese ? "素描化" : "Sketching"
         onSelected: {
-            if(window.getPicture)
+            if(window.pictureNum!==0)
             {
                 isopen=true
                 var p=JSON.stringify(window.filepath)

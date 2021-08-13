@@ -15,7 +15,7 @@ Window {
     property var m_config: Object                       // 配置 Object
     property var m_skin: Object                         // 皮肤 Object
     property bool isChinese: true                       // 语言类型 true-中文 false-英文
-    property bool getPicture:false
+    property var pictureNum: 0
     property var filepath: ""
     property int currentIndex: 1                        // StackView 当前页面
 
@@ -51,7 +51,7 @@ Window {
         }
     }
 
-    onGetPictureChanged: {
+    onPictureNumChanged: {
         getpic()
     }
 

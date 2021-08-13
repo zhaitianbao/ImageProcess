@@ -8,7 +8,6 @@ ImageProcess::ImageProcess(QObject *parent) : QObject(parent)
 cv::Mat ImageProcess::convertQImageToMat(QImage &image)
 {
     cv::Mat mat;
-
     switch( image.format() )
     {
     case QImage::Format_ARGB32:
@@ -21,6 +20,9 @@ cv::Mat ImageProcess::convertQImageToMat(QImage &image)
         cv::cvtColor(mat, mat, cv::COLOR_BGR2RGB);
         break;
     case QImage::Format_Indexed8:
+        mat = cv::Mat(image.height(), image.width(), CV_8UC1, (void*)image.constBits(), image.bytesPerLine());
+        break;
+    case QImage::Format_Grayscale8:
         mat = cv::Mat(image.height(), image.width(), CV_8UC1, (void*)image.constBits(), image.bytesPerLine());
         break;
     default: mat = cv::Mat(); break;
@@ -287,14 +289,15 @@ void ImageProcess::getCenterPoint(cv::Mat ori, int &px, int &py)
     py = Target_center.y + oy - dst.rows/2;
 }
 
-cv::Mat ImageProcess::ImageSketch(cv::Mat src,int size)
+cv::Mat ImageProcess::ImageSketch(QImage src,int size)
 {
+    cv::Mat ori=convertQImageToMat(src);
     Mat blur;
-    GaussianBlur(src, blur, Size(2*size+1, 2*size+1), 0, 0);
+    GaussianBlur(ori, blur, Size(2*size+1, 2*size+1), 0, 0);
 
     // 提取纹理
     Mat veins;
-    divide(src, blur, veins, 255);
+    divide(ori, blur, veins, 255);
 
     // 加深处理
     Mat deepenb, deepena;

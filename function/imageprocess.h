@@ -48,7 +48,7 @@ public:
     static void getCenterPoint(cv::Mat ori, int &px, int &py);
 
     // 图像素描化
-    static cv::Mat ImageSketch(cv::Mat src,int size=10);
+    static cv::Mat ImageSketch(QImage src,int size=10);
 
 };
 

@@ -38,8 +38,15 @@ void ImageDisplay::updateImage(QString url)
 void ImageDisplay::imagesketch(QString url,int size)
 {
     QString temp=url.mid(9,url.size()-10);
-    cv::Mat im=cv::imread(temp.toStdString(),0);
-    cv::Mat result=ImageProcess::ImageSketch(im,size);
+    QImage im,im2;
+    im.load(temp);
+    im2=im.convertToFormat(QImage::Format_Grayscale8);
+    if(im2.isNull())
+    {
+        QMessageBox::information(nullptr, "Information", QStringLiteral("图片路径无效，加载图片失败。"), QMessageBox::Ok);
+        return;
+    }
+    cv::Mat result=ImageProcess::ImageSketch(im2,size);
     m_image = ImageProcess::convertMatToQImage(result);
     result_image=m_image;
     update();

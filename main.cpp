@@ -9,6 +9,7 @@
 #include <QQmlContext>
 #include <QApplication>
 #include <QMessageBox>
+#include <QTextCodec>
 #include "function/globalfun.h"
 #include "function/imageprocess.h"
 #include "function/imagedisplay.h"

@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ttf/Aldrich-Regular.ttf</file>
+        <file>ttf/BalooBhaina-Regular.ttf</file>
+        <file>ttf/Branch-zystoo.otf</file>
+        <file>ttf/BRUX.otf</file>
+        <file>ttf/Times_New_Roman.ttf</file>
+    </qresource>
+</RCC>

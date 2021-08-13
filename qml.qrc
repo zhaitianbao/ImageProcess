@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/Content/Content.qml</file>
+        <file>qml/Content/MenuBar.qml</file>
+        <file>qml/Content/ModuleBar.qml</file>
+        <file>qml/Content/ToolBar.qml</file>
+        <file>qml/Content/View.qml</file>
+        <file>qml/Component/ZAction.qml</file>
+        <file>qml/Component/ZButton.qml</file>
+        <file>qml/Component/ZCombobox.qml</file>
+        <file>qml/Component/ZGroupBox.qml</file>
+        <file>qml/Component/ZSlider.qml</file>
+        <file>qml/Component/ZSpinBox.qml</file>
+        <file>qml/Component/ZText.qml</file>
+        <file>qml/Component/ZTextEdit.qml</file>
+        <file>qml/Component/ZToolButton.qml</file>
+        <file>qml/View/Sketch.qml</file>
+        <file>qml/Component/TransparentBunker.qml</file>
+        <file>qml/Component/TransparentMask.qml</file>
+        <file>qml/View/Gray.qml</file>
+    </qresource>
+</RCC>

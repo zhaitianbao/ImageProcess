@@ -19,5 +19,6 @@
         <file>qml/Component/TransparentBunker.qml</file>
         <file>qml/Component/TransparentMask.qml</file>
         <file>qml/View/Gray.qml</file>
+        <file>qml/View/Resize.qml</file>
     </qresource>
 </RCC>

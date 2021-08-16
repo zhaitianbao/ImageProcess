@@ -71,6 +71,7 @@ Rectangle {
         {
         case 1: stack.push("../View/Sketch.qml"); break;
         case 2: stack.push("../View/Gray.qml"); break;
+        case 3: stack.push("../View/Resize.qml"); break;
         }
 
         stack.currentItem.width = stack.width

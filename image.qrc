@@ -74,5 +74,7 @@
         <file>image/ModuleBar/gray.png</file>
         <file>image/MenuBar/gray.png</file>
         <file>image/MenuBar/black.png</file>
+        <file>image/ModuleBar/resizeL.png</file>
+        <file>image/ModuleBar/resize.png</file>
     </qresource>
 </RCC>

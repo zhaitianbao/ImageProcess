@@ -50,6 +50,9 @@ public:
     // 图像素描化
     static cv::Mat ImageSketch(QImage src,int size=10);
 
+    // 图像尺寸调整
+    static cv::Mat ImageReasize(QImage src,int fx=0,int fy=0,int type=1);
+
 };
 
 #endif // IMAGEPROCESS_H

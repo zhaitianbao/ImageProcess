@@ -308,3 +308,10 @@ cv::Mat ImageProcess::ImageSketch(QImage src,int size)
 
 }
 
+cv::Mat ImageProcess::ImageReasize(QImage src,int fx,int fy,int type)
+{
+    cv::Mat ori=convertQImageToMat(src);
+    Mat result;
+    cv::resize(ori, result, cv::Size(0, 0), fx, fy, type);
+    return result;
+}

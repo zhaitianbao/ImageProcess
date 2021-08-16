@@ -12,8 +12,12 @@ Rectangle {
     id: root
     color: "#708090"
 
+    property int itemWidth: 100
+    property int itemHeight: 30
+    property int pixelSize: 14
     property bool isopen:false
     property var filesavepath:""
+    property int space: 10
     // Separator line - portrait
     Rectangle {
         width: lineWidth; height: parent.height - margin*50
@@ -45,7 +49,7 @@ Rectangle {
     Connections{
         target: window
         onGetpic:{
-            console.log(window.filepath)
+            //console.log(window.filepath)
             var p=JSON.stringify(window.filepath)
             originalImg.updateImage(p)
             originalImg.updateSize()
@@ -71,6 +75,61 @@ Rectangle {
         }
     }
 
+    // 参数区
+    Column {
+        id:sketchColumn
+        y:space*2
+        x:parent.width*2/3
+        width: parent.width/4; height: space*10
+        Row{
+            spacing: space
+            anchors.horizontalCenter: sketchColumn.horizontalCenter
+            ZText {
+                width: root.itemWidth; height: root.itemHeight
+                pixelSize:root.pixelSize+5
+                content: isChinese ? "滤波尺寸" : "Filter Size"
+            }
+        }
+        Row{
+            spacing: space
+            ZText {
+                width: root.itemWidth; height: root.itemHeight
+                pixelSize: root.pixelSize
+                content: isChinese ? "最小值: 1" : "Min: 1"
+            }
+            ZText {
+                width: root.itemWidth*5/4; height: root.itemHeight
+                pixelSize: root.pixelSize
+            }
+            ZText {
+                width: root.itemWidth; height: root.itemHeight
+                pixelSize: root.pixelSize
+                content: isChinese ? "最大值: 100" : "Max: 100"
+            }
+        }
+        Row{
+            spacing: space
+            width: parent.width; height: 20
+            // 滑块
+            Item {
+                id: sketchContainer
+                width: parent.width; height: 20
+                ZSlider{
+                    id:sketchslider
+                    width: parent.width; height: 15
+                    from: 1; to: 100
+                    onMoved: {
+                        if(isopen)
+                        {
+                            var p=JSON.stringify(window.filepath)
+                            sketchImg.imagesketch(p,sketchslider.value)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     ZButton{
         id:exportbutton
         y:parent.height-100
@@ -82,29 +141,6 @@ Rectangle {
         onSelected: {
             savePicture()
         }
-    }
-
-    // 滑块
-    Item {
-        id: sketchContainer
-        y:75
-        x:parent.width*3/4-100
-        width: parent.width/4; height: 20
-
-        ZSlider{
-            id:sketchslider
-            width: parent.width; height: 15
-            from: 1; to: 100
-            onMoved: {
-                if(isopen)
-                {
-                    var p=JSON.stringify(window.filepath)
-                    sketchImg.imagesketch(p,sketchslider.value)
-                }
-            }
-
-        }
-
     }
 
     function savePicture()

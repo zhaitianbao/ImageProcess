@@ -52,6 +52,38 @@ void ImageDisplay::imagesketch(QString url,int size)
     update();
 }
 
+void ImageDisplay::imagegray(QString url)
+{
+    QString temp=url.mid(9,url.size()-10);
+    QImage im,im2;
+    im.load(temp);
+    im2=im.convertToFormat(QImage::Format_Grayscale8);
+    if(im2.isNull())
+    {
+        QMessageBox::information(nullptr, "Information", QStringLiteral("图片路径无效，加载图片失败。"), QMessageBox::Ok);
+        return;
+    }
+    m_image = im2;
+    result_image=m_image;
+    update();
+}
+
+void ImageDisplay::imageresize(QString url,int fx,int fy,int type)
+{
+    QString temp=url.mid(9,url.size()-10);
+    QImage im;
+    im.load(temp);
+    if(im.isNull())
+    {
+        QMessageBox::information(nullptr, "Information", QStringLiteral("图片路径无效，加载图片失败。"), QMessageBox::Ok);
+        return;
+    }
+    cv::Mat result=ImageProcess::ImageReasize(im,fx,fy,type);
+    m_image = ImageProcess::convertMatToQImage(result);
+    result_image=m_image;
+    update();
+}
+
 void ImageDisplay::updateSize()
 {
     if ( m_image.isNull() ) {

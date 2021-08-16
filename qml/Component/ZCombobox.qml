@@ -13,10 +13,6 @@ ComboBox {
     property alias inputText: txt.text
     property alias comboboxText: txt
 
-    onBackgroundColorChanged: {
-        canvas.requestPaint()
-    }
-
     background: Rectangle {
         implicitWidth: 120
         implicitHeight: 40
@@ -54,28 +50,6 @@ ComboBox {
         }
     }
 
-    indicator: Canvas {
-        id: canvas
-        x: comboBox.width - width - comboBox.rightPadding
-        y: comboBox.topPadding + (comboBox.availableHeight - height) / 2
-        width: 12; height: 8
-        contextType: "2d"
-
-        Connections {
-            target: comboBox
-            onPressedChanged: canvas.requestPaint()
-        }
-
-        onPaint: {
-            context.reset();
-            context.moveTo(0, 0);
-            context.lineTo(width, 0);
-            context.lineTo(width / 2, height);
-            context.closePath();
-            context.fillStyle = comboBox.pressed ? m_skin.activeBorderColor : m_skin.defaultBorderColor
-            context.fill();
-        }
-    }
 
     contentItem: Rectangle {
         anchors.fill:parent

@@ -62,7 +62,7 @@ Rectangle {
     }
 
     ZButton{
-        id:sketchbutton
+        id:resizebutton
         y:50
         anchors.horizontalCenter: parent.horizontalCenter
         pixelSize:25
@@ -99,7 +99,7 @@ Rectangle {
             spacing: space
             ZSpinBox{
                 id:resizex
-                spinBoxPrefix:"横向"
+                spinBoxPrefix:isChinese ?"横向":"H"
                 width: root.itemWidth; height: root.itemHeight
                 spinBoxValue: 0
                 pixelSize: root.pixelSize
@@ -113,7 +113,7 @@ Rectangle {
             spacing: space
             ZSpinBox{
                 id:resizey
-                spinBoxPrefix:"纵向"
+                spinBoxPrefix:isChinese ? "纵向" : "V"
                 width: root.itemWidth; height: root.itemHeight
                 spinBoxValue: 0
                 pixelSize: root.pixelSize

@@ -12,11 +12,11 @@ Window {
     minimumWidth: 1000; minimumHeight: 600
     title: qsTr("ImageProcess-ZTB")
 
-    property var m_config: Object                       // 配置 Object
+    property var m_config: Object                      // 配置 Object
     property var m_skin: Object                         // 皮肤 Object
     property bool isChinese: true                       // 语言类型 true-中文 false-英文
-    property var pictureNum: 0                          // 已加载的图片数量
-    property var filepath: ""                           // 最新加载的图片路径
+    property var pictureNum: 0                         // 已加载的图片数量
+    property var filepath: ""                               // 最新加载的图片路径
     property int currentIndex: 1                        // StackView 当前页面
 
     property int lineWidth: 4                           // 线条宽度，全局适用

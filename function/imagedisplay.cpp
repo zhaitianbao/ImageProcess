@@ -1,7 +1,7 @@
 ﻿#include "imagedisplay.h"
 #include <QPainter>
 #include "imageprocess.h"
-
+#include <QDebug>
 ImageDisplay::ImageDisplay(QQuickItem *parent) : QQuickPaintedItem(parent)
 {
 
@@ -56,6 +56,7 @@ void ImageDisplay::imagegray(QString url)
 {
     QString temp=url.mid(9,url.size()-10);
     QImage im,im2;
+    qDebug()<<temp;
     im.load(temp);
     im2=im.convertToFormat(QImage::Format_Grayscale8);
     if(im2.isNull())
@@ -79,6 +80,57 @@ void ImageDisplay::imageresize(QString url,int fx,int fy,int type)
         return;
     }
     cv::Mat result=ImageProcess::ImageReasize(im,fx,fy,type);
+    m_image = ImageProcess::convertMatToQImage(result);
+    result_image=m_image;
+    update();
+}
+
+void ImageDisplay::imagesplicing(QString url1,QString url2,QString url3,QString url4,int type)
+{
+    QVector<cv::Mat> images;
+    if(url1!="")
+    {
+
+        QString temp=url1.mid(9,url1.size()-10);
+        QImage im;
+        qDebug()<<temp;
+        im.load(temp);
+        cv::Mat tm=ImageProcess::convertQImageToMat(im);
+        images.push_back(tm);
+    }
+    if(url2!="")
+    {
+        QString temp=url2.mid(9,url2.size()-10);
+        QImage im;
+        qDebug()<<temp;
+        im.load(temp);
+        cv::Mat tm=ImageProcess::convertQImageToMat(im);
+        images.push_back(tm);
+    }
+    if(url3!="")
+    {
+        QString temp=url3.mid(9,url3.size()-10);
+        QImage im;
+        qDebug()<<temp;
+        im.load(temp);
+        cv::Mat tm=ImageProcess::convertQImageToMat(im);
+        images.push_back(tm);
+    }
+    if(url4!="")
+    {
+        QString temp=url4.mid(9,url4.size()-10);
+        QImage im;
+        qDebug()<<temp;
+        im.load(temp);
+        cv::Mat tm=ImageProcess::convertQImageToMat(im);
+        images.push_back(tm);
+    }
+    if(images.size()==0)
+    {
+        QMessageBox::information(nullptr, "Information", QStringLiteral("图片路径无效，加载图片失败。"), QMessageBox::Ok);
+        return;
+    }
+    cv::Mat result=ImageProcess::ImageSplicing(images,type);
     m_image = ImageProcess::convertMatToQImage(result);
     result_image=m_image;
     update();

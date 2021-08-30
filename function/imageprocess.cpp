@@ -315,3 +315,78 @@ cv::Mat ImageProcess::ImageReasize(QImage src,int fx,int fy,int type)
     cv::resize(ori, result, cv::Size(0, 0), fx, fy, type);
     return result;
 }
+
+ cv::Mat ImageProcess::ImageSplicing(QVector<cv::Mat> images,int type)
+ {
+     if (type != 0 && type != 1)
+         type = 0;
+
+     int num = images.size();
+     int newrow = 0;
+     int newcol = 0;
+     cv::Mat result;
+
+     // 横向拼接
+     if (type == 0)
+     {
+         int minrow = 10000;
+         for (int i = 0; i < num; ++i)
+         {
+             if (minrow > images[i].rows)
+                 minrow = images[i].rows;
+         }
+         newrow = minrow;
+         for (int i = 0; i < num; ++i)
+         {
+             int tcol = images[i].cols*minrow / images[i].rows;
+             int trow = newrow;
+             cv::resize(images[i], images[i], cv::Size(tcol, trow));
+             newcol += images[i].cols;
+             if (images[i].type() != images[0].type())
+                 images[i].convertTo(images[i], images[0].type());
+         }
+         result = cv::Mat(newrow, newcol, images[0].type(), cv::Scalar(255, 255, 255));
+
+         cv::Range rangerow, rangecol;
+         int start = 0;
+         for (int i = 0; i < num; ++i)
+         {
+             rangerow = cv::Range((newrow - images[i].rows) / 2, (newrow - images[i].rows) / 2 + images[i].rows);
+             rangecol = cv::Range(start, start + images[i].cols);
+             images[i].copyTo(result(rangerow, rangecol));
+             start += images[i].cols;
+         }
+     }
+     // 纵向拼接
+     else if (type == 1) {
+         int mincol = 10000;
+         for (int i = 0; i < num; ++i)
+         {
+             if (mincol > images[i].cols)
+                 mincol = images[i].cols;
+         }
+         newcol = mincol;
+         for (int i = 0; i < num; ++i)
+         {
+             int trow = images[i].rows*mincol / images[i].cols;
+             int tcol = newcol;
+             cv::resize(images[i], images[i], cv::Size(tcol, trow));
+             newrow += images[i].rows;
+             if (images[i].type() != images[0].type())
+                 images[i].convertTo(images[i], images[0].type());
+         }
+         result = cv::Mat(newrow, newcol, images[0].type(), cv::Scalar(255, 255, 255));
+
+         cv::Range rangerow, rangecol;
+         int start = 0;
+         for (int i = 0; i < num; ++i)
+         {
+             rangecol= cv::Range((newcol - images[i].cols) / 2, (newcol - images[i].cols) / 2 + images[i].cols);
+             rangerow = cv::Range(start, start + images[i].rows);
+             images[i].copyTo(result(rangerow, rangecol));
+             start += images[i].rows;
+         }
+     }
+
+     return result;
+ }

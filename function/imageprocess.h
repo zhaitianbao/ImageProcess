@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include <opencv2/opencv.hpp>
-
+#include <vector>
 using namespace std;
 using namespace cv;
 
@@ -53,6 +53,8 @@ public:
     // 图像尺寸调整
     static cv::Mat ImageReasize(QImage src,int fx=0,int fy=0,int type=1);
 
+    // 图像组合
+    static cv::Mat ImageSplicing(QVector<cv::Mat> images,int type);
 };
 
 #endif // IMAGEPROCESS_H

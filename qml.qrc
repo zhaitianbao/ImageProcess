@@ -20,5 +20,6 @@
         <file>qml/Component/TransparentMask.qml</file>
         <file>qml/View/Gray.qml</file>
         <file>qml/View/Resize.qml</file>
+        <file>qml/View/Splicing.qml</file>
     </qresource>
 </RCC>

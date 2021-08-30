@@ -8,6 +8,7 @@
 #include <QTextCodec>
 #include <opencv2/opencv.hpp>
 #include <string>
+#include <vector>
 using namespace std;
 
 class ImageDisplay : public QQuickPaintedItem
@@ -35,6 +36,7 @@ public:
     Q_INVOKABLE void imagesketch(QString url,int size=10);
     Q_INVOKABLE void imagegray(QString url);
     Q_INVOKABLE void imageresize(QString url,int fx=0,int fy=0,int type=1);
+    Q_INVOKABLE void imagesplicing(QString url1,QString url2,QString url3,QString url4,int type);
     Q_INVOKABLE void updateImageList(QList<QImage> list);
     Q_INVOKABLE void updateSize();
     Q_INVOKABLE void showImageInIndex(int index);

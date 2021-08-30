@@ -53,7 +53,7 @@ Rectangle {
     }
 
     ZButton{
-        id:sketchbutton
+        id:graybutton
         y:50
         anchors.horizontalCenter: parent.horizontalCenter
         pixelSize:25

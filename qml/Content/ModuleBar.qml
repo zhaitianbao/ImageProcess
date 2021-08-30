@@ -45,6 +45,14 @@ Rectangle {
                 checked: currentIndex === 3
                 onSelected: currentIndex = 3
             }
+            ZButton {
+                anchors.horizontalCenter: parent.horizontalCenter
+                imageSource:  m_skin.isDark ?"qrc:/image/ModuleBar/resize.png":"qrc:/image/ModuleBar/resizeL.png"
+                useInModuleBar: true
+                content: isChinese ? "图像组合" : "combination"
+                checked: currentIndex === 4
+                onSelected: currentIndex = 4
+            }
         }
     }
 

@@ -76,5 +76,7 @@
         <file>image/MenuBar/black.png</file>
         <file>image/ModuleBar/resizeL.png</file>
         <file>image/ModuleBar/resize.png</file>
+        <file>image/ModuleBar/splicing.png</file>
+        <file>image/ModuleBar/splicingL.png</file>
     </qresource>
 </RCC>

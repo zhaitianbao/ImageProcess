@@ -264,11 +264,10 @@ Rectangle {
             pixelSize: 20
             content: isChinese ? "模式:" : "Model:"
         }
-        Row{
+        Rectangle{
             id:modelrow1
             anchors.top: modeltext.bottom;
             anchors.topMargin: 10;
-            anchors.left: parent.left;
             RadioButton{
                 id:rbutton1
                 checked: true
@@ -300,11 +299,10 @@ Rectangle {
                 content: isChinese ? "横向" : "Horizontal"
             }
         }
-        Row{
+        Rectangle{
             id:modelrow2
             anchors.top: modelrow1.bottom;
             anchors.topMargin: 30;
-            anchors.left: parent.left;
             RadioButton{
                 id:rbutton2
                 checked: false

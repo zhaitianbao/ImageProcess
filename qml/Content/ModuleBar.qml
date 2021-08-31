@@ -47,9 +47,9 @@ Rectangle {
             }
             ZButton {
                 anchors.horizontalCenter: parent.horizontalCenter
-                imageSource:  m_skin.isDark ?"qrc:/image/ModuleBar/resize.png":"qrc:/image/ModuleBar/resizeL.png"
+                imageSource:  m_skin.isDark ?"qrc:/image/ModuleBar/splicing.png":"qrc:/image/ModuleBar/splicingL.png"
                 useInModuleBar: true
-                content: isChinese ? "图像组合" : "combination"
+                content: isChinese ? "图像拼接" : "splicing"
                 checked: currentIndex === 4
                 onSelected: currentIndex = 4
             }

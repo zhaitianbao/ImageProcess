@@ -233,7 +233,7 @@ Rectangle {
         y:55
         x:parent.width*9/16
         width: parent.width/8; height: 50
-        content: isChinese ? "图像拼接" : "Splicing"
+        content: isChinese ? "图像拼接" : "Splice"
         onSelected: {
             if(picnum!==0)
             {

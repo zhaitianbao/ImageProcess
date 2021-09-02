@@ -73,8 +73,10 @@ Rectangle {
         case 2: stack.push("../View/Gray.qml"); break;
         case 3: stack.push("../View/Resize.qml"); break;
         case 4: stack.push("../View/Splicing.qml"); break;
+        case 5: stack.push("../View/Eclosion.qml"); break;
+        case 6: stack.push("../View/Filter.qml"); break;
+        case 7: stack.push("../View/ComicStrip.qml"); break;
         }
-
         stack.currentItem.width = stack.width
         stack.currentItem.height = stack.height
     }

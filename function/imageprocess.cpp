@@ -390,3 +390,107 @@ cv::Mat ImageProcess::ImageReasize(QImage src,int fx,int fy,int type)
 
      return result;
  }
+
+ cv::Mat ImageProcess::ImageEclosion(cv::Mat src, cv::Point center,float level)
+ {
+     CV_Assert(src.channels() == 3);
+     if (level>0.9)
+         level = 0.9f;
+     float diff = (1-level) * (src.rows / 2 * src.rows / 2 + src.cols / 2 * src.cols / 2);
+     cv::Mat result = src.clone();
+     for (int i = 0; i < result.rows; ++i)
+     {
+         for (int j = 0; j < result.cols; ++j)
+         {
+             float dx = float(center.x - j);
+             float dy = float(center.y - i);
+             float ra = dx * dx + dy * dy;
+             float m = ((ra-diff) / diff * 255)>0? ((ra - diff) / diff * 255):0;
+             int b = result.at<Vec3b>(i, j)[0];
+             int g = result.at<Vec3b>(i, j)[1];
+             int r = result.at<Vec3b>(i, j)[2];
+             b = (int)(b+ m);
+             g = (int)(g + m);
+             r = (int)(r + m);
+             result.at<Vec3b>(i, j)[0] = (b > 255 ? 255 : (b < 0 ? 0 : b));
+             result.at<Vec3b>(i, j)[1] = (g > 255 ? 255 : (g < 0 ? 0 : g));
+             result.at<Vec3b>(i, j)[2] = (r > 255 ? 255 : (r < 0 ? 0 : r));
+         }
+     }
+     return result;
+ }
+
+ cv::Mat ImageProcess::ImageNostalgic(cv::Mat src)
+ {
+     CV_Assert(src.channels() == 3);
+     int row = src.rows;
+     int col = src.cols;
+     cv::Mat temp = src.clone();
+     for (int i = 0; i < row; ++i)
+     {
+         uchar *s = src.ptr<uchar>(i);
+         uchar *t = temp.ptr<uchar>(i);
+         for (int j = 0; j < col; ++j)
+         {
+             int B = s[3 * j];
+             int G = s[3 * j + 1];
+             int R = s[3 * j + 2];
+             // 怀旧调色
+             float newB = 0.272f*R + 0.534f*G + 0.131f*B;
+             float newG = 0.349f*R + 0.686f*G + 0.168f*B;
+             float newR = 0.393f*R + 0.769f*G + 0.189f*B;
+             if (newB < 0)
+                 newB = 0;
+             if (newB > 255)
+                 newB = 255;
+             if (newG < 0)
+                 newG = 0;
+             if (newG > 255)
+                 newG = 255;
+             if (newR < 0)
+                 newR = 0;
+             if (newR > 255)
+                 newR = 255;
+             t[3 * j] = (uchar)newB;
+             t[3 * j + 1] = (uchar)newG;
+             t[3 * j + 2] = (uchar)newR;
+         }
+     }
+     return temp;
+ }
+
+ cv::Mat ImageProcess::ImageComicStrip(cv::Mat src)
+ {
+     CV_Assert(src.channels() == 3);
+     int row = src.rows;
+     int col = src.cols;
+     cv::Mat temp = src.clone();
+     for (int i = 0; i < row; ++i)
+     {
+         uchar *s = src.ptr<uchar>(i);
+         uchar *t = temp.ptr<uchar>(i);
+         for (int j = 0; j < col; ++j)
+         {
+             int B = s[3 * j];
+             int G = s[3 * j + 1];
+             int R = s[3 * j + 2];
+             // 连环画效果
+             int newB = abs(B - G + B + R)*R / 256;
+             int newG = abs(B - G + B + R)*R / 256;
+             int newR = abs(G - B + G + R)*R / 256;
+
+             newR = max(0, min(newR, 255));
+             newG = max(0, min(newG, 255));
+             newB = max(0, min(newB, 255));
+
+             int gray = (newR + newG + newB) / 3;
+
+             int T = min(255, gray + 10);
+
+             t[3 * j] = gray;
+             t[3 * j + 1] = T;
+             t[3 * j + 2] = T;
+         }
+     }
+     return temp;
+ }

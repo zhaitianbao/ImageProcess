@@ -78,5 +78,11 @@
         <file>image/ModuleBar/resize.png</file>
         <file>image/ModuleBar/splicing.png</file>
         <file>image/ModuleBar/splicingL.png</file>
+        <file>image/ModuleBar/eclosion.png</file>
+        <file>image/ModuleBar/eclosionL.png</file>
+        <file>image/ModuleBar/filter.png</file>
+        <file>image/ModuleBar/filterL.png</file>
+        <file>image/ModuleBar/comicStrip.png</file>
+        <file>image/ModuleBar/comicStripL.png</file>
     </qresource>
 </RCC>

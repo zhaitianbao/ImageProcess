@@ -12,8 +12,15 @@ Rectangle {
     id: root
     color: "#708090"
 
+    property int itemWidth: 200
+    property int itemHeight: 30
+    property int space: 10
+    property int pixelSize: 14
     property bool isopen:false
     property var filesavepath:""
+
+    property var type: 0
+
     // Separator line - portrait
     Rectangle {
         width: lineWidth; height: parent.height - margin*50
@@ -33,7 +40,7 @@ Rectangle {
     }
 
     ImageDisplay {
-        id: grayImg
+        id: filterImg
         anchors.verticalCenter: parent.verticalCenter
         x:parent.width/2+10
         width:parent.width/2-20;height: parent.height-300
@@ -53,20 +60,55 @@ Rectangle {
     }
 
     ZButton{
-        id:graybutton
+        id:filterbutton
         y:50
         anchors.horizontalCenter: parent.horizontalCenter
         pixelSize:25
         font_family: "楷体"
         width: 200;height: 50
-        content: isChinese ? "灰度化" : "Gray"
+        content: isChinese ? "滤镜" : "Filter"
         onSelected: {
             if(window.pictureNum!==0)
             {
                 isopen=true
                 var p=JSON.stringify(window.filepath)
-                grayImg.imagegray(p)
-                grayImg.updateSize()
+                console.log(type)
+                filterImg.imagefilter(p,type)
+                filterImg.updateSize()
+            }
+        }
+    }
+
+    // 参数区
+    Column {
+        id:filterColumn
+        y:3*space
+        x:parent.width*2/3
+        width: parent.width/4; height: space*10
+        spacing: space
+        Row{
+            spacing: space
+            anchors.horizontalCenter: filterColumn.horizontalCenter
+            ZText {
+                width: contentWidth; height: contentHeight
+                pixelSize:root.pixelSize+5
+                content: isChinese ? "效果" : "Effect"
+            }
+        }
+        Row{
+            spacing: space
+            anchors.horizontalCenter: filterColumn.horizontalCenter
+            ZCombobox{
+                id:rtype
+                width: root.itemWidth; height: root.itemHeight
+                model: isChinese?["怀旧色"]:["Nostalgic"]
+                font.pixelSize: root.pixelSize
+                font.family: "微软雅黑"
+                currentIndex: 0
+                onCurrentIndexChanged: {
+                    type = currentIndex
+                    console.log(type)
+                }
             }
         }
     }
@@ -101,8 +143,8 @@ Rectangle {
             // 保存文件
             switch ( fileType )
             {
-            case "png": grayImg.saveImage(filesavepath,fileName,fileType); isSaved=true;break;
-            case "bmp": grayImg.saveImage(filesavepath,fileName,fileType); isSaved=true;break;
+            case "png": filterImg.saveImage(filesavepath,fileName,fileType); isSaved=true;break;
+            case "bmp": filterImg.saveImage(filesavepath,fileName,fileType); isSaved=true;break;
             default: break;
             }
         }

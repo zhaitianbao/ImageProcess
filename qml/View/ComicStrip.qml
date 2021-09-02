@@ -33,7 +33,7 @@ Rectangle {
     }
 
     ImageDisplay {
-        id: grayImg
+        id: comicstripImg
         anchors.verticalCenter: parent.verticalCenter
         x:parent.width/2+10
         width:parent.width/2-20;height: parent.height-300
@@ -53,20 +53,20 @@ Rectangle {
     }
 
     ZButton{
-        id:graybutton
+        id:comicstripbutton
         y:50
         anchors.horizontalCenter: parent.horizontalCenter
         pixelSize:25
         font_family: "楷体"
         width: 200;height: 50
-        content: isChinese ? "灰度化" : "Gray"
+        content: isChinese ? "连环画" : "Comicstrip"
         onSelected: {
             if(window.pictureNum!==0)
             {
                 isopen=true
                 var p=JSON.stringify(window.filepath)
-                grayImg.imagegray(p)
-                grayImg.updateSize()
+                comicstripImg.imagecomicstrip(p)
+                comicstripImg.updateSize()
             }
         }
     }
@@ -101,8 +101,8 @@ Rectangle {
             // 保存文件
             switch ( fileType )
             {
-            case "png": grayImg.saveImage(filesavepath,fileName,fileType); isSaved=true;break;
-            case "bmp": grayImg.saveImage(filesavepath,fileName,fileType); isSaved=true;break;
+            case "png": comicstripImg.saveImage(filesavepath,fileName,fileType); isSaved=true;break;
+            case "bmp": comicstripImg.saveImage(filesavepath,fileName,fileType); isSaved=true;break;
             default: break;
             }
         }

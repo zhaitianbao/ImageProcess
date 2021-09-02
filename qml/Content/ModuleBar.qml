@@ -53,6 +53,30 @@ Rectangle {
                 checked: currentIndex === 4
                 onSelected: currentIndex = 4
             }
+            ZButton {
+                anchors.horizontalCenter: parent.horizontalCenter
+                imageSource:  m_skin.isDark ?"qrc:/image/ModuleBar/eclosion.png":"qrc:/image/ModuleBar/eclosionL.png"
+                useInModuleBar: true
+                content: isChinese ? "羽化" : "eclosion"
+                checked: currentIndex === 5
+                onSelected: currentIndex = 5
+            }
+            ZButton {
+                anchors.horizontalCenter: parent.horizontalCenter
+                imageSource:  m_skin.isDark ?"qrc:/image/ModuleBar/filter.png":"qrc:/image/ModuleBar/filterL.png"
+                useInModuleBar: true
+                content: isChinese ? "滤镜" : "filter"
+                checked: currentIndex === 6
+                onSelected: currentIndex = 6
+            }
+            ZButton {
+                anchors.horizontalCenter: parent.horizontalCenter
+                imageSource:  m_skin.isDark ?"qrc:/image/ModuleBar/comicStrip.png":"qrc:/image/ModuleBar/comicStripL.png"
+                useInModuleBar: true
+                content: isChinese ? "连环画" : "comicStrip"
+                checked: currentIndex === 7
+                onSelected: currentIndex = 7
+            }
         }
     }
 

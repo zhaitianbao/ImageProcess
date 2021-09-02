@@ -55,6 +55,16 @@ public:
 
     // 图像组合
     static cv::Mat ImageSplicing(QVector<cv::Mat> images,int type);
+
+    // 羽化
+    static cv::Mat ImageEclosion(cv::Mat src, cv::Point center,float level);
+
+    // 怀旧色滤镜
+    static cv::Mat ImageNostalgic(cv::Mat src);
+
+    // 连环画
+    static cv::Mat ImageComicStrip(cv::Mat src);
+
 };
 
 #endif // IMAGEPROCESS_H

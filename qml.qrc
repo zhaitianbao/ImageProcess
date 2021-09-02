@@ -21,5 +21,8 @@
         <file>qml/View/Gray.qml</file>
         <file>qml/View/Resize.qml</file>
         <file>qml/View/Splicing.qml</file>
+        <file>qml/View/Eclosion.qml</file>
+        <file>qml/View/Filter.qml</file>
+        <file>qml/View/ComicStrip.qml</file>
     </qresource>
 </RCC>

@@ -37,6 +37,11 @@ public:
     Q_INVOKABLE void imagegray(QString url);
     Q_INVOKABLE void imageresize(QString url,int fx=0,int fy=0,int type=1);
     Q_INVOKABLE void imagesplicing(QString url1,QString url2,QString url3,QString url4,int type);
+
+    Q_INVOKABLE void imageeclosion(QString url,int fx=0,int fy=0,float level=0.5);
+    Q_INVOKABLE void imagefilter(QString url,int type=0);
+    Q_INVOKABLE void imagecomicstrip(QString url);
+
     Q_INVOKABLE void updateImageList(QList<QImage> list);
     Q_INVOKABLE void updateSize();
     Q_INVOKABLE void showImageInIndex(int index);

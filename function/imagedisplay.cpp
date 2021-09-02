@@ -136,6 +136,69 @@ void ImageDisplay::imagesplicing(QString url1,QString url2,QString url3,QString 
     update();
 }
 
+void ImageDisplay::imageeclosion(QString url,int fx,int fy,float level)
+{
+    QString temp=url.mid(9,url.size()-10);
+    QImage im,im2;
+    im.load(temp);
+    if(im.isNull())
+    {
+        QMessageBox::information(nullptr, "Information", QStringLiteral("图片路径无效，加载图片失败。"), QMessageBox::Ok);
+        return;
+    }
+    im2=im.convertToFormat(QImage::Format_RGB888);
+    cv::Mat tm=ImageProcess::convertQImageToMat(im2);
+    if(fx==0&&fy==0)
+    {
+        fx=im.width()/2;
+        fy=im.height()/2;
+    }
+    cv::Mat result=ImageProcess::ImageEclosion(tm,cv::Point(fx,fy),level);
+    m_image = ImageProcess::convertMatToQImage(result);
+    result_image=m_image;
+    update();
+}
+
+void ImageDisplay::imagefilter(QString url,int type)
+{
+    QString temp=url.mid(9,url.size()-10);
+    QImage im,im2;
+    im.load(temp);
+    if(im.isNull())
+    {
+        QMessageBox::information(nullptr, "Information", QStringLiteral("图片路径无效，加载图片失败。"), QMessageBox::Ok);
+        return;
+    }
+    im2=im.convertToFormat(QImage::Format_RGB888);
+    cv::Mat tm=ImageProcess::convertQImageToMat(im2);
+    cv::Mat result;
+    switch(type){
+    case 0:result=ImageProcess::ImageNostalgic(tm);
+    default:break;
+    }
+    m_image = ImageProcess::convertMatToQImage(result);
+    result_image=m_image;
+    update();
+}
+
+void ImageDisplay::imagecomicstrip(QString url)
+{
+    QString temp=url.mid(9,url.size()-10);
+    QImage im,im2;
+    im.load(temp);
+    if(im.isNull())
+    {
+        QMessageBox::information(nullptr, "Information", QStringLiteral("图片路径无效，加载图片失败。"), QMessageBox::Ok);
+        return;
+    }
+    im2=im.convertToFormat(QImage::Format_RGB888);
+    cv::Mat tm=ImageProcess::convertQImageToMat(im2);
+    cv::Mat result=ImageProcess::ImageComicStrip(tm);
+    m_image = ImageProcess::convertMatToQImage(result);
+    result_image=m_image;
+    update();
+}
+
 void ImageDisplay::updateSize()
 {
     if ( m_image.isNull() ) {

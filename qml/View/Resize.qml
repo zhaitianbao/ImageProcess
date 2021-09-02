@@ -68,7 +68,7 @@ Rectangle {
         pixelSize:25
         font_family: "楷体"
         width: 200;height: 50
-        content: isChinese ? "尺寸调整" : "Resizeing"
+        content: isChinese ? "尺寸调整" : "Resize"
         onSelected: {
             if(window.pictureNum!==0)
             {
@@ -90,13 +90,14 @@ Rectangle {
             spacing: space
             anchors.horizontalCenter: resizeColumn.horizontalCenter
             ZText {
-                width: root.itemWidth; height: root.itemHeight
+                width: contentWidth; height: contentHeight
                 pixelSize:root.pixelSize+5
                 content: isChinese ? "尺寸参数" : "Size Parameters"
             }
         }
         Row{
             spacing: space
+            anchors.horizontalCenter: resizeColumn.horizontalCenter
             ZSpinBox{
                 id:resizex
                 spinBoxPrefix:isChinese ?"横向":"H"
@@ -111,6 +112,7 @@ Rectangle {
         }
         Row{
             spacing: space
+            anchors.horizontalCenter: resizeColumn.horizontalCenter
             ZSpinBox{
                 id:resizey
                 spinBoxPrefix:isChinese ? "纵向" : "V"
@@ -125,6 +127,7 @@ Rectangle {
         }
         Row{
             spacing: space
+            anchors.horizontalCenter: resizeColumn.horizontalCenter
             ZCombobox{
                 id:rtype
                 width: root.itemWidth; height: root.itemHeight

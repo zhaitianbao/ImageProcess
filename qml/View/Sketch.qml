@@ -63,7 +63,7 @@ Rectangle {
         pixelSize:25
         font_family: "楷体"
         width: 200;height: 50
-        content: isChinese ? "素描化" : "Sketching"
+        content: isChinese ? "素描化" : "Sketch"
         onSelected: {
             if(window.pictureNum!==0)
             {
@@ -91,18 +91,14 @@ Rectangle {
             }
         }
         Row{
-            spacing: space
+            spacing: sketchColumn.width - 2* root.itemWidth
             ZText {
                 width: root.itemWidth; height: root.itemHeight
                 pixelSize: root.pixelSize
                 content: isChinese ? "最小值: 1" : "Min: 1"
             }
-            ZText {
-                width: root.itemWidth*5/4; height: root.itemHeight
-                pixelSize: root.pixelSize
-            }
-            ZText {
-                width: root.itemWidth; height: root.itemHeight
+            ZText {              //x:sketchColumn.width-root.itemWidth
+                width: contentWidth; height: root.itemHeight
                 pixelSize: root.pixelSize
                 content: isChinese ? "最大值: 100" : "Max: 100"
             }
@@ -123,6 +119,7 @@ Rectangle {
                         {
                             var p=JSON.stringify(window.filepath)
                             sketchImg.imagesketch(p,sketchslider.value)
+                            sketchImg.updateSize()
                         }
                     }
                 }
